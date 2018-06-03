@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import br.com.rodrigoamora.androidgram.R;
+import br.com.rodrigoamora.androidgram.ui.fragment.SettingsFragment;
+import br.com.rodrigoamora.androidgram.util.FragmentUtil;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            FragmentUtil.changeFragment(R.id.conatiner, SettingsFragment.class, getFragmentManager(), false, null);
             return true;
         }
 
