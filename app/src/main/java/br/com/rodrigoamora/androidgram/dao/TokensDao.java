@@ -11,6 +11,13 @@ public class TokensDao {
         return context.getSharedPreferences("androidgram", Context.MODE_PRIVATE);
     }
 
+    public static void deleteAccessTokenInstagram(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(ACCESS_TOKEN_INSTAGRAM, "");
+        editor.commit();
+    }
+
     public static void saveAccessTokenInstagram(Context context, String accessToken) {
         SharedPreferences sharedPreferences = getSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();

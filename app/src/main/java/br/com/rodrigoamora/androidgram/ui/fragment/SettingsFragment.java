@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 
 import br.com.rodrigoamora.androidgram.R;
+import br.com.rodrigoamora.androidgram.dao.TokensDao;
 import br.com.rodrigoamora.androidgram.ui.activity.LoginInstagramActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,11 +28,15 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
-
         unbinder = ButterKnife.bind(this, rootView);
+
+        if (!TokensDao.getAccessTokenInstagram(getActivity()).equals("")) {
+            integrateInstagram.setChecked(true);
+        }
 
         return rootView;
     }
+
 
     @Override
     public void onDestroyView() {
@@ -41,8 +46,12 @@ public class SettingsFragment extends Fragment {
 
     @OnClick(R.id.integrate_instagram)
     public void loginInstagram() {
-        Intent intent = new Intent(getActivity(), LoginInstagramActivity.class);
-        startActivity(intent);
+        if (integrateInstagram.isChecked()) {
+            Intent intent = new Intent(getActivity(), LoginInstagramActivity.class);
+            startActivity(intent);
+        } else {
+            TokensDao.deleteAccessTokenInstagram(getActivity());
+        }
     }
 
 }
