@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import br.com.rodrigoamora.androidgram.R;
+import br.com.rodrigoamora.androidgram.ui.fragment.ListPhotosInstagramFragment;
 import br.com.rodrigoamora.androidgram.ui.fragment.SettingsFragment;
 import br.com.rodrigoamora.androidgram.util.FragmentUtil;
 
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            FragmentUtil.changeFragment(R.id.conatiner, ListPhotosInstagramFragment.class, getFragmentManager(), false, null);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
