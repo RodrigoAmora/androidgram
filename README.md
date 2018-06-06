@@ -1,5 +1,5 @@
 # androidgram
-A app Android for list photos of the your Instagram profile.<br>
+An app Android for list photos of the your Instagram profile.<br>
 The project run from Android 5.0
 
 <hr>
