@@ -6,6 +6,7 @@ The project run from Android 5.0
 
 The project use as dependencies:
 - MaterialDesign;
+- Google Maps API;
 - Retrofit 2;
 - Dagger 2;
 - ButterKnife;
