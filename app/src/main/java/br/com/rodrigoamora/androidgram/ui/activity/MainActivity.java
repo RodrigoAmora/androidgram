@@ -1,7 +1,9 @@
 package br.com.rodrigoamora.androidgram.ui.activity;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +16,10 @@ import br.com.rodrigoamora.androidgram.R;
 import br.com.rodrigoamora.androidgram.ui.fragment.ListPhotosInstagramFragment;
 import br.com.rodrigoamora.androidgram.ui.fragment.SettingsFragment;
 import br.com.rodrigoamora.androidgram.util.FragmentUtil;
+import br.com.rodrigoamora.androidgram.util.PermissionUtil;
+
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +29,11 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createToolbarandNavigtationView();
+        if (!checkPermission()) {
+            PermissionUtil.requestPermissions(this, new String[]{ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION});
+        } else {
+            FragmentUtil.changeFragment(R.id.conatiner, ListPhotosInstagramFragment.class, getFragmentManager(), false, null);
+        }
     }
 
     @Override
@@ -95,6 +106,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private boolean checkPermission() {
+        int resultAccessFineLocation = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION);
+        int resultAccessCoarseLocation = ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_COARSE_LOCATION);
+        return resultAccessFineLocation == PackageManager.PERMISSION_GRANTED && resultAccessCoarseLocation == PackageManager.PERMISSION_GRANTED;
     }
 
 }
