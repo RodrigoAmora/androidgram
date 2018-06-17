@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AndroidGram</string>
 
-    <string name="google_play_services_api_key">AIzaSyAYNXcCqhmmGpXC9XuCn5DbXGqk7eMDQfM</string>
+    <string name="GOOGLE_API_KEY">AIzaSyAYNXcCqhmmGpXC9XuCn5DbXGqk7eMDQfM</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
