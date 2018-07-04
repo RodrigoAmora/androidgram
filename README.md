@@ -5,10 +5,10 @@ The project run from Android 5.0
 <hr>
 
 The project use as dependencies:
-- MaterialDesign;
+- Material Design;
 - Google Maps API;
 - Retrofit 2;
 - Dagger 2;
-- ButterKnife;
-- CircleViewImage;
+- Butter Knife;
+- Circle View Image;
 - Picasso;
