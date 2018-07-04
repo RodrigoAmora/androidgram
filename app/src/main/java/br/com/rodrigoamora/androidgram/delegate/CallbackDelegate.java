@@ -1,8 +1,8 @@
 package br.com.rodrigoamora.androidgram.delegate;
 
-public interface Delegate {
+public interface CallbackDelegate<T> {
 
     void error();
-    void success();
+    void success(T t);
 
 }

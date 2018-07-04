@@ -1,6 +1,6 @@
 package br.com.rodrigoamora.androidgram.callback;
 
-import br.com.rodrigoamora.androidgram.delegate.Delegate;
+import br.com.rodrigoamora.androidgram.delegate.CallbackDelegate;
 import br.com.rodrigoamora.androidgram.model.Data;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -8,10 +8,10 @@ import retrofit2.Response;
 
 public class ListPhotosInstagramCallback implements Callback<Data> {
 
-    private Delegate delegate;
+    private CallbackDelegate<Data> delegate;
     private Data data;
 
-    public ListPhotosInstagramCallback(Delegate delegate) {
+    public ListPhotosInstagramCallback(CallbackDelegate delegate) {
         this.delegate = delegate;
     }
 
@@ -19,7 +19,7 @@ public class ListPhotosInstagramCallback implements Callback<Data> {
     public void onResponse(Call<Data> call, Response<Data> response) {
         if (response.isSuccessful()) {
             data = response.body();
-            delegate.success();
+            delegate.success(data);
         } else {
             delegate.error();
         }

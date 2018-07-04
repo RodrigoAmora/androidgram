@@ -24,7 +24,7 @@ import br.com.rodrigoamora.androidgram.application.MyApplication;
 import br.com.rodrigoamora.androidgram.callback.ListPhotosInstagramCallback;
 import br.com.rodrigoamora.androidgram.component.ListPhotosInstagramComponent;
 import br.com.rodrigoamora.androidgram.dao.TokensDao;
-import br.com.rodrigoamora.androidgram.delegate.Delegate;
+import br.com.rodrigoamora.androidgram.delegate.CallbackDelegate;
 import br.com.rodrigoamora.androidgram.model.Data;
 import br.com.rodrigoamora.androidgram.model.Photo;
 import br.com.rodrigoamora.androidgram.service.InstagramService;
@@ -34,7 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import retrofit2.Call;
 
-public class ListPhotosInstagramFragment extends Fragment implements com.google.android.gms.maps.OnMapReadyCallback, Delegate {
+public class ListPhotosInstagramFragment extends Fragment implements com.google.android.gms.maps.OnMapReadyCallback, CallbackDelegate<Data> {
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
@@ -73,9 +73,9 @@ public class ListPhotosInstagramFragment extends Fragment implements com.google.
     }
 
     @Override
-    public void success() {
+    public void success(Data data) {
         progressBar.setVisibility(View.GONE);
-        data = callback.getData();
+        this.data = data;
         mapFragment.getMapAsync(this);
     }
 
