@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,15 +30,20 @@ import br.com.rodrigoamora.androidgram.model.Photo;
 import br.com.rodrigoamora.androidgram.service.InstagramService;
 import br.com.rodrigoamora.androidgram.ui.activity.LoginInstagramActivity;
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import retrofit2.Call;
 
 public class ListPhotosInstagramFragment extends Fragment implements com.google.android.gms.maps.OnMapReadyCallback, Delegate {
 
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
     MapFragment mapFragment;
 
     private Call<Data> call;
     private Data data;
     private ListPhotosInstagramCallback callback;
+    private Unbinder unbinder;
 
     @Inject
     InstagramService service;
@@ -47,6 +53,7 @@ public class ListPhotosInstagramFragment extends Fragment implements com.google.
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.list_photos_instagram_fragment, container, false);
 
+        unbinder = ButterKnife.bind(this, rootView);
         if (!verifyAccessToken()) {
             Intent intent = new Intent(getActivity(), LoginInstagramActivity.class);
             startActivity(intent);
@@ -62,11 +69,12 @@ public class ListPhotosInstagramFragment extends Fragment implements com.google.
 
     @Override
     public void error() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void success() {
+        progressBar.setVisibility(View.GONE);
         data = callback.getData();
         mapFragment.getMapAsync(this);
     }
@@ -78,6 +86,7 @@ public class ListPhotosInstagramFragment extends Fragment implements com.google.
     }
 
     private void searchPhotos() {
+        progressBar.setVisibility(View.VISIBLE);
         String accessToken = TokensDao.getAccessTokenInstagram(getActivity());
         int count = 200;
         call = service.listRecentPhotos(accessToken, count);

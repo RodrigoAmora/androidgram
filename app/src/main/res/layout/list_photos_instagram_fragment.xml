@@ -11,4 +11,12 @@
         android:layout_height="match_parent"
         android:name="com.google.android.gms.maps.MapFragment" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
 </android.support.design.widget.CoordinatorLayout>
