@@ -11,7 +11,7 @@ public interface InstagramService {
     Call<Object> getProfile(@Query("access_token") String accessToken);
 
     @GET("v1/users/self/media/recent/")
-    Call<Data> listRecentPhotos(@Query("access_token") String accessToken);
+    Call<Data> listRecentPhotos(@Query("access_token") String accessToken, @Query("count") int count);
 
     @GET("oauth/")
     Call<Object> oatuh(@Query("access_token") String accessToken);

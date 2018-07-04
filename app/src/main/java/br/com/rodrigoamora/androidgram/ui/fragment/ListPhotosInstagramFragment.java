@@ -79,7 +79,8 @@ public class ListPhotosInstagramFragment extends Fragment implements com.google.
 
     private void searchPhotos() {
         String accessToken = TokensDao.getAccessTokenInstagram(getActivity());
-        call = service.listRecentPhotos(accessToken);
+        int count = 200;
+        call = service.listRecentPhotos(accessToken, count);
         call.enqueue(callback);
     }
 
